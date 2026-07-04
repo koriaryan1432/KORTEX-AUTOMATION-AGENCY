@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Lead {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  company   String?
+  service   String
+  budget    String
+  message   String
+  status    String   @default("NEW") // NEW, CONTACTED, CALL_BOOKED, PROPOSAL_SENT, CLOSED, LOST
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  name          String
+  email         String
+  phone         String
+  preferredDate DateTime
+  preferredTime String
+  businessType  String
+  message       String?
+  status        String   @default("PENDING") // PENDING, CONFIRMED, RESCHEDULED, CANCELLED
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Newsletter {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model CaseStudy {
+  id          String   @id @default(uuid())
+  title       String
+  industry    String
+  problem     String
+  solution    String
+  result      String
+  toolsUsed   String   // comma-separated values
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

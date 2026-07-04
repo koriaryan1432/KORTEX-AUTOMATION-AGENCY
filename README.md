@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kortex Automation | Premium AI Automation Agency Website
 
-## Getting Started
+Kortex Automation is a premium, fully responsive, and animated full-stack AI Automation Agency platform built using **Next.js 16**, **Tailwind CSS v4**, **Framer Motion**, and **Prisma ORM** with **SQLite** for development.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+*   **Design Aesthetics**: Futuristic Premium Dark SaaS design, smooth layout grids, glowing borders, custom typography, and glassmorphic cards.
+*   **Animated Interactive Sections**:
+    *   **Hero**: Real-time simulated node execution lines and terminal log stream.
+    *   **Workflow**: Multi-stage logical loop timelines switcher.
+    *   **Industries & Solutions**: Interactive market problem/solution visual switcher.
+    *   **Integrations**: Infinite scrolling Category logo marquee.
+    *   **Process**: Vertical timeline stepper.
+*   **Functional Backend API Endpoints**:
+    *   **Contact Lead Capturing**: Zod-validated input schema, database logging, and Nodemailer-ready email notifications layout.
+    *   **Meeting Booking System**: Zod-validated schedules, date/time range parsing, and database reservation engine.
+    *   **Newsletter Magnet**: Deduplication, AJAX responses, and dashboard sync.
+*   **Operations Control Dashboard (`/admin`)**:
+    *   View all Leads, Bookings, and Subscribers.
+    *   Filter Leads by status and search by name/email/company.
+    *   Update lead status (NEW, CONTACTED, CALL_BOOKED, PROPOSAL_SENT, CLOSED, LOST) dynamically in the database.
+    *   Save custom follow-up notes for each lead.
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+*   **Frontend**: Next.js App Router, React, TypeScript, Tailwind CSS v4, Framer Motion, Lucide React
+*   **Backend**: Next.js API Routes, Prisma ORM
+*   **Database**: SQLite (local development) / PostgreSQL (production-ready)
+*   **Form Validation**: Zod
+*   **Notification Engine**: Nodemailer (SMTP)
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file in the root directory (based on `.env.example`):
+
+```env
+# Database Connection URL (SQLite)
+DATABASE_URL="file:./dev.db"
+
+# SMTP Mail Settings (Nodemailer notifications to owner)
+# If omitted, notifications are mocked and logged to the console
+SMTP_HOST="smtp.example.com"
+SMTP_PORT=587
+SMTP_USER="username@example.com"
+SMTP_PASS="your-password"
+NOTIFICATION_EMAIL="owner@example.com"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Setup & Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Install Packages
+```bash
+npm install
+```
 
-## Learn More
+### 2. Generate Prisma Client & Migrate Database
+Run the initial database setup migrations:
+```bash
+npx prisma migrate dev --name init
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Run Development Server
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) to view the client-facing website.
+To view the **Admin Control Panel**, navigate to [http://localhost:3000/admin](http://localhost:3000/admin) and log in with the placeholder password: `admin123`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🏗️ Production Build & Verification
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+To verify that the Next.js compiler builds successfully without type checking errors:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+---
+
+## 🚀 Deployment
+
+The easiest way to deploy this platform is to use the **Vercel Platform**:
+
+1.  Push the code to your GitHub repository.
+2.  Import the repository inside Vercel.
+3.  Configure the Environment Variables (`DATABASE_URL`, `SMTP_HOST`, etc.).
+4.  Add a production database (e.g. Supabase or Neon PostgreSQL).
+    *   To switch Prisma to PostgreSQL in production, update `datasource db { provider = "postgresql" }` in `prisma/schema.prisma` and run `npx prisma db push`.
+5.  Click Deploy.
